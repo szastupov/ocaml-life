@@ -1,0 +1,5 @@
+This is a toy implementation of Conway's Game of Life made to play with ocaml graphics.
+Controls:
+Mouse click - toggle cell state
+q - quit the game
+any other key - next generation
