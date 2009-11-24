@@ -30,18 +30,19 @@ let make_state () =
 	Array.init size make_line
 
 let neighbours st x y =
-  let get x y =
-	try if st.(x).(y) then 1 else 0
-	with _ -> 0
-  in
-	get (x-1) y
-	+ get (x+1) y
-	+ get x (y-1)
-	+ get x (y+1)
-	+ get (x+1) (y+1)
-	+ get (x+1) (y-1)
-	+ get (x-1) (y+1)
-	+ get (x-1) (y-1)
+  let count sum (x, y) =
+	if (x > 0 && y > 0
+		&& x < size && y < size
+		&& st.(x).(y))
+	then sum+1
+	else sum
+  and cells = [
+	x-1, y;	x+1, y;
+	x, y-1;	x, y+1;
+	x+1, y+1; x+1, y-1;
+	x-1, y+1; x-1, y-1;
+  ] in
+	List.fold_left count 0 cells
 
 let recalc l r =
   for x=0 to size-1 do
